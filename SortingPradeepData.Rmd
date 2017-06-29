@@ -1,0 +1,103 @@
+---
+title: "CodeForMachineLearningFormat"
+author: "Kirk Geier"
+date: "June 28, 2017"
+output: html_document
+---
+
+Load Packages
+```{r}
+library("broom", lib.loc="~/R/R-3.3.1/library")
+library("tidyr", lib.loc="~/R/R-3.3.1/library")
+library("ggplot2", lib.loc="~/R/R-3.3.1/library")
+library("gridExtra", lib.loc="~/R/R-3.3.1/library")
+library("dplyr", lib.loc="~/R/R-3.3.1/library")
+library("tidyr", lib.loc="~/R/R-3.3.2/library")
+library("plotly", lib.loc="~/R/R-3.3.2/library")
+library(plyr)
+library(data.table)
+library(reshape2)
+library(readr)
+```
+
+
+```{r}
+#note, 9a and 9b were combined in advance to this. 9a block 11 crashed part way through. 
+
+i=1
+for (i in 1:37){
+  data_dir = 'C:/Users/kgeier/Google Drive/OlsenLab_cloud/All Experiments/EyeTracking/ObjFamETStudy/MACHINE_LEARNING_codeForPradeep/SampleReportsAll' 
+  filename =  i
+  fileextension = ".csv"
+  filename = paste0(filename, fileextension)
+  filepath = paste(data_dir, '/', filename, sep = ''); filepath
+  
+  test <- fread(filepath)
+  
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+MACHINE_LEARNING_codeForPradeep/SampleReportsAll
+Define some paths
+```{r}
+  data_dir = 'C:/Users/kgeier/Google Drive/OlsenLab_cloud/All Experiments/EyeTracking/ObjFamETStudy/MACHINE_LEARNING_codeForPradeep/SampleReportsAll' 
+  filename =  'sample_report_*.csv' 
+  filepath = paste(data_dir, '/', filename, sep = ''); filepath
+```
+Read in Data
+```{r}
+
+df.list <- list(1:37)
+
+```
+
+j = 1 
+for (i in df.list){
+  mainDir <- "C:/Users/kgeier/Google Drive/OlsenLab_cloud/All Experiments/MAYO/R studio analysis/design.files"
+  subDir <- i
+  path <- file.path(mainDir,subDir)
+  dir.create(path, showWarnings = FALSE)
+  write.csv(x=df.list[[j]], file= paste0(path,"/","design.csv"), row.names = FALSE)
+  j= j+1
+}
+#subj2001
+mainDir <- "C:/Users/kgeier/Google Drive/OlsenLab_cloud/All Experiments/MAYO/R studio analysis/design.files"
+subDir <- 2001
+path <- file.path(mainDir,subDir)
+dir.create(path, showWarnings = FALSE)
+write.csv(x=df.list[[25]], file= paste0(path,"/","design.csv"), row.names = FALSE)
+
+#writing file for df.final (design file not separated by subj)
+mainDir <- "C:/Users/kgeier/Google Drive/OlsenLab_cloud/All Experiments/MAYO/R studio analysis/design.files"
+subDir <- "all24"
+path <- file.path(mainDir,subDir)
+dir.create(path, showWarnings = FALSE)
+write.csv(x=df.final, file= paste0(path,"/","designAll.csv"), row.names = FALSE)
+
+
+
+
+
+foreach($file in (Get-ChildItem "C:/Users/kgeier/Google Drive/OlsenLab_cloud/All Experiments/EyeTracking/ObjFamETStudy/MACHINE_LEARNING_codeForPradeep/SampleReportsAll")) {
+
+  $newname = $file.FullName -replace '\.xls$', '.csv'
+  $ExcelWB = new-object -comobject excel.application
+  $Workbook = $ExcelWB.Workbooks.Open($file.FullName) 
+  $Workbook.SaveAs($newname,6)
+  $Workbook.Close($false)
+  $ExcelWB.quit()
+
+}
+
