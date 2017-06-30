@@ -32,7 +32,10 @@ for (i in 1:37){
   filename = paste0(filename, fileextension)
   filepath = paste(data_dir, '/', filename, sep = ''); filepath
   
-  test <- fread(filepath)
+  p1 = i
+  p2 = 'df'
+  dfname = paste0(p1,p2)
+  dfname <- fread(filepath)
   
 }
 
